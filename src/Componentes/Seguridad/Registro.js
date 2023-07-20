@@ -1,6 +1,7 @@
-import { Avatar, Card, Container, Icon, Grid, Typography, TextField, Button, Link } from "@material-ui/core";
+import { Avatar, Card, Container, Icon, Grid, Typography, TextField, Button } from "@material-ui/core";
 import React from "react";
 import useStyles from "../../Theme/useStyles";
+import { Link } from 'react-router-dom';
 
 const ResgistroUsuario = () => {
     const classes = useStyles();
@@ -49,7 +50,7 @@ const ResgistroUsuario = () => {
                                         </Button>
                                     </Grid>
                                 </Grid>
-                                <Link href ="/" variant="body1" className={classes.link}>¿Ya tienes una cuenta?</Link>
+                                <Link to ="/login" variant="body1" className={classes.link}>¿Ya tienes una cuenta?</Link>
                             </form>
                         </Card>                    
                     </Grid>
