@@ -5,6 +5,7 @@ import theme from "./Theme/theme";
 import ResgistroUsuario from "./Componentes/Seguridad/Registro";
 import MenuAppBar from "./Componentes/Navegacion/MenuAppBar";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Productos from "./Componentes/Pantallas/Productos";
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Switch>
           <Route exact path ="/Login" component={Login} />
           <Route exact path ="/registrar" component={ResgistroUsuario} />
-        </Switch>
+          <Route exact path = "/" component ={Productos}/>
+       </Switch>
       </Router>
 
     </ThemeProvider>

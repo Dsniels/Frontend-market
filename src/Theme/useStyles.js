@@ -93,6 +93,26 @@ const useStyles = makeStyles({
             display:"none"
         }
 
+    },
+    text_title : {
+        fontWeight: 600,
+        color: '#494949',
+        marginBottom: 10
+    },
+    media:{
+        height: 250,
+        backgroundColor: '#F2F2F2',
+        margin: '15px 15px 0 15px'
+    },
+    price:{
+        float : 'right',
+        padding: '0 20px 0 20px',
+        backgroundColor : '#0f80aa'
+    },
+    text_card: {
+        fontWeight : 'bold',
+        color : '#656565',
+        marginBottom: 8
     }
 })
 
