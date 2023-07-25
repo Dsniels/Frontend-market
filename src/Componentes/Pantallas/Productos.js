@@ -2,9 +2,15 @@ import { Avatar, Button, Card, CardContent, CardMedia, Container, Grid, Typograp
 import React from 'react';
 import useStyles from '../../Theme/useStyles';
 import { productoArray } from '../Data/DataPrueba';
+import { useHistory } from 'react-router-dom';
 
 const Productos = () => {
 
+    const history = useHistory(); 
+
+    const verProducto = (id) => {
+        history.push("/Detalles/" + id);
+    }
     const Array  = productoArray;
 
     const classes = useStyles();
@@ -32,7 +38,8 @@ const Productos = () => {
                             <Button
                             variant='contained'
                             color='primary'
-                            fullWidth>
+                            fullWidth
+                            onClick={() => verProducto(data.key)}>
                                 Detalles
                             </Button>
                         </CardContent>

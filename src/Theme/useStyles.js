@@ -113,6 +113,19 @@ const useStyles = makeStyles({
         fontWeight : 'bold',
         color : '#656565',
         marginBottom: 8
+    },
+    PaperImg: {
+        backgroundColor: "#f2f2f2"
+    },
+    mediaDetail:{
+        width: 380,
+        height: 380,
+        margin: "auto"
+    },
+    text_details:{
+        fontWeight: 500,
+        color: "#494949",
+        marginBottom: 5
     }
 })
 
