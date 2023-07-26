@@ -1,9 +1,14 @@
 import { Button, CardMedia, Container, Grid, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from '@material-ui/core';
 import React from 'react';
 import useStyles from '../../Theme/useStyles';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Detalles = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const agregarCarrito = () => {
+        history.push("/carrito")
+    }
     return(
         <Container className={classes.containermt}>
             <Typography variant="h4" className={classes.text_title}>
@@ -51,7 +56,8 @@ const Detalles = () => {
                                     <TableCell colSpan={2}>
                                         <Button variant ="contained"
                                         color="primary"
-                                        size="large">
+                                        size="large"
+                                        onClick={agregarCarrito}>
                                             Agregar al Carrito
                                         </Button>
                                     </TableCell>
