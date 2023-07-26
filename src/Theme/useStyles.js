@@ -134,6 +134,10 @@ const useStyles = makeStyles({
     },
     paperPadding:{
         padding: 20
+    },
+    gridPC : {
+        margin: "auto",
+        marginTop: 20
     }
 })
 
