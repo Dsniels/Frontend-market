@@ -7,6 +7,7 @@ import MenuAppBar from "./Componentes/Navegacion/MenuAppBar";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Productos from "./Componentes/Pantallas/Productos";
 import Detalles from "./Componentes/Pantallas/Detalles";
+import CarritoCompras from "./Componentes/Pantallas/CarritoCompras";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path ="/registrar" component={ResgistroUsuario} />
           <Route exact path = "/" component ={Productos}/>
           <Route exact path = "/Detalles/:id" component ={Detalles}/>
+          <Route exact path = "/Carrito" component ={CarritoCompras}/>
        </Switch>
       </Router>
 
