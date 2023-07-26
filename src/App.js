@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Productos from "./Componentes/Pantallas/Productos";
 import Detalles from "./Componentes/Pantallas/Detalles";
 import CarritoCompras from "./Componentes/Pantallas/CarritoCompras";
+import ProcesoCompra from "./Componentes/Pantallas/ProcesoCompra";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path = "/" component ={Productos}/>
           <Route exact path = "/Detalles/:id" component ={Detalles}/>
           <Route exact path = "/Carrito" component ={CarritoCompras}/>
+          <Route exact path = "/ProcesoCompra" component ={ProcesoCompra}/>
        </Switch>
       </Router>
 

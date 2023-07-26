@@ -1,16 +1,17 @@
-import { Button, Container, FormControl, FormControlLabel, FormLabel, Grid, RadioGroup, StepLabel, Stepper, TextField, Typography } from "@material-ui/core";
+import { Button, Container, FormControl, FormControlLabel, FormLabel, Grid, RadioGroup, Step, StepLabel, Stepper, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
+import useStyles from "../../Theme/useStyles";
 
 const ProcesoCompra = () => {
 
 
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(1);
     const continuarProceso = () => {
-        setActiveStep((prevActiveStep => prevActiveStep + 1));
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
     const RetrocederProceso = () => {
-        setActiveStep((prevActiveStep => prevActiveStep - 1));
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
     const classes = useStyles();
     return(
@@ -30,7 +31,7 @@ const ProcesoCompra = () => {
                 </Step>
             </Stepper>
             {activeStep === 1 ? (
-                <Grid md = {6} xs = {12} className={classes.gridPC}> 
+                <Grid item md = {6} xs = {12} className={classes.gridPC}> 
                     <Typography variant ="h6" className ={classes.text_title}>
                         Envio Producto
                     </Typography>
@@ -60,7 +61,7 @@ const ProcesoCompra = () => {
                     </form>
                 </Grid>
             ) : activeStep === 2 ? (
-                <Grid md = {3} xs = {12} className={classes.gridPC}> 
+                <Grid item md = {3} xs = {12} className={classes.gridPC}> 
                     <Typography variant="h6" className={classes.text_title} >Metodo de Pago</Typography>
                     <Grid container spacing= {2}>
                         <Grid item xs ={12}>
@@ -68,12 +69,13 @@ const ProcesoCompra = () => {
                                 <FormLabel>
                                     Seleccion Metodo
                                 </FormLabel>
-                                <RadioGroup>
-                                    <FormControlLabel>
-                                        
-                                    </FormControlLabel>
-                                </RadioGroup>
+                                
                             </FormControl>
+                            <Grid item xs = {12}>
+                                <Button variant ="contained" color ="primary" onClick={RetrocederProceso}>
+                                    Continuar
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
