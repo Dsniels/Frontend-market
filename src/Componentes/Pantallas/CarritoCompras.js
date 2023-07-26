@@ -2,8 +2,13 @@ import { Button, CardMedia, Container, Divider, Grid, Icon, IconButton, MenuItem
 import React from 'react';
 import { productoArray } from '../Data/DataPrueba';
 import useStyles from '../../Theme/useStyles';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const CarritoCompras = () => {
+    const history = useHistory();
+    const RealizarCompra = () =>{
+        history.push("/ProcesoCompra");
+    }
     const array = productoArray;
     const classes = useStyles();
     return(
@@ -61,7 +66,7 @@ const CarritoCompras = () => {
                             $143.46
                         </Typography>
                         <Divider className={classes.gridmb}/>
-                        <Button variant="contained" color ="primary" size ="large">
+                        <Button variant="contained" color ="primary" size ="large" onClick = {RealizarCompra}>
                             Comprar
                         </Button>
                     </Paper>
