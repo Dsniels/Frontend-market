@@ -126,6 +126,14 @@ const useStyles = makeStyles({
         fontWeight: 500,
         color: "#494949",
         marginBottom: 5
+    },
+    imgproductoCC : {
+        backgroundColor: "#f2f2f2",
+        width : 80,
+        height: 70
+    },
+    paperPadding:{
+        padding: 20
     }
 })
 
