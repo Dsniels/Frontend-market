@@ -138,6 +138,12 @@ const useStyles = makeStyles({
     gridPC : {
         margin: "auto",
         marginTop: 20
+    },
+    ButtonAnterior :{
+        marginRight: 8,
+    },
+    FormControl: {
+        margin : 12
     }
 })
 
