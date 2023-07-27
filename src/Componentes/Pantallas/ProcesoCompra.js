@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Step, StepLabel, Stepper, TextField, Typography } from "@material-ui/core";
+import { Button, Card, CardMedia, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Step, StepLabel, Stepper, Table, TableBody, TableCell, TableContainer, TableFooter, TableRow, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import useStyles from "../../Theme/useStyles";
@@ -85,7 +85,118 @@ const ProcesoCompra = () => {
                     </Grid>
                 </Grid>
             ): activeStep === 3 ? (
-                <Grid> 
+                <Grid container className={classes.gridPC}>
+                    <Grid item md={8} xs={12} className={classes.gridLR}>
+                        <Typography variant="h6" className={classes.text_title}>
+                            Envio
+                        </Typography>
+                        <Typography>
+                            Direccion : Calle, colonia, ciudad
+                        </Typography>
+                        <Divider className={classes.Divider}/>
+                        <Typography variant="h6" className={classes.text_title}>
+                            Metodo de pago
+                        </Typography>
+                        <Typography>
+                            Metodo : paypal
+                        </Typography>
+                        <Divider className={classes.Divider}/>
+                        <Typography variant="h6" className={classes.text_title}>
+                            Productos
+                        </Typography>
+                        <TableContainer className={classes.gridmb}>
+                            <Table>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
+                                            <CardMedia className={classes.imgproductoPC} image title="imagen"></CardMedia>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography className={classes.text_details}>
+                                                Playera tigres
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography className={classes.text_details}>
+                                                2 x $250 = 500
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <Button variant="contained" color="primary" onClick={RetrocederProceso}>
+                            Anterior
+                        </Button>
+                    </Grid> 
+                    <Grid item md={4} xs={12}>
+                        <TableContainer component={Paper} square>
+                            <Table>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell colSpan={2}>
+                                            <Typography  variant = "h6"  className={classes.text_title}>
+                                                Resumen del Pedido
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                                Productos
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                                $500
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                               Envio
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                                $2
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                                Impuesto
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                                $5
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                               Total
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography  className={classes.text_title}>
+                                                $510
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Button variant="contained" color="primary" size="large" >Realizar Pedido</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>
                     
                 </Grid>
             ) : null}
