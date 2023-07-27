@@ -144,6 +144,20 @@ const useStyles = makeStyles({
     },
     FormControl: {
         margin : 12
+    },
+    gridLR:{
+        paddingLeft: 30,
+        paddingBottom : 20,
+        paddingRight : 30
+    },
+    Divider:{
+        marginTop: 12,
+        marginBottom: 12
+    },
+    imgproductoPC : {
+        backgroundColor: "#f2f2f2",
+        width: 50,
+        height: 40
     }
 })
 
