@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, FormControlLabel, FormLabel, Grid, RadioGroup, Step, StepLabel, Stepper, TextField, Typography } from "@material-ui/core";
+import { Button, Container, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Step, StepLabel, Stepper, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import useStyles from "../../Theme/useStyles";
@@ -67,12 +67,17 @@ const ProcesoCompra = () => {
                         <Grid item xs ={12}>
                             <FormControl className={classes.FormControl}>
                                 <FormLabel>
-                                    Seleccion Metodo
+                                    Seleccione Metodo
                                 </FormLabel>
-                                
+                                <RadioGroup>
+                                    <FormControlLabel value = "paypal" control={<Radio color="primary"/>} label="paypal o tarjeta"/>
+                                </RadioGroup>                                
                             </FormControl>
                             <Grid item xs = {12}>
-                                <Button variant ="contained" color ="primary" onClick={RetrocederProceso}>
+                                <Button variant ="contained" color ="primary" onClick={RetrocederProceso} className={classes.ButtonAnterior}>
+                                    Anterior
+                                </Button>
+                                <Button variant ="contained" color ="primary" onClick={continuarProceso}>
                                     Continuar
                                 </Button>
                             </Grid>
