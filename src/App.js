@@ -9,6 +9,7 @@ import Productos from "./Componentes/Pantallas/Productos";
 import Detalles from "./Componentes/Pantallas/Detalles";
 import CarritoCompras from "./Componentes/Pantallas/CarritoCompras";
 import ProcesoCompra from "./Componentes/Pantallas/ProcesoCompra";
+import OrdenCompra from "./Componentes/Pantallas/OrdenCompra";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path = "/Detalles/:id" component ={Detalles}/>
           <Route exact path = "/Carrito" component ={CarritoCompras}/>
           <Route exact path = "/ProcesoCompra" component ={ProcesoCompra}/>
+          <Route exact path = "/OrdenCompra/:id" component ={OrdenCompra}/>
        </Switch>
       </Router>
 

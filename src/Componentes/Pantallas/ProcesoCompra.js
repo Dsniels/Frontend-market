@@ -1,17 +1,25 @@
-import { Button, Card, CardMedia, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Step, StepLabel, Stepper, Table, TableBody, TableCell, TableContainer, TableFooter, TableRow, TextField, Typography } from "@material-ui/core";
+import { Button, Card, CardMedia, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup, Step, StepLabel, Stepper, Table, TableBody, TableCell, TableContainer, TableFooter, TableRow, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import useStyles from "../../Theme/useStyles";
 
 const ProcesoCompra = () => {
-
-
+    const history = useHistory();
     const [activeStep, setActiveStep] = useState(1);
     const continuarProceso = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
     const RetrocederProceso = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
+
+    const RealizarCompra = () => {
+        const IdCompra = "";
+        history.push("/OrdenCompra/" + IdCompra);
+    
+
+
     }
     const classes = useStyles();
     return(
@@ -190,7 +198,7 @@ const ProcesoCompra = () => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell>
-                                            <Button variant="contained" color="primary" size="large" >Realizar Pedido</Button>
+                                            <Button variant="contained" color="primary" size="large" onClick={RealizarCompra}>Realizar Pedido</Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
