@@ -180,7 +180,7 @@ const ProcesoCompra = () => {
                                         </TableCell>
                                         <TableCell>
                                             <Typography  className={classes.text_title}>
-                                                $5
+                                                $   6   
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
@@ -192,7 +192,7 @@ const ProcesoCompra = () => {
                                         </TableCell>
                                         <TableCell>
                                             <Typography  className={classes.text_title}>
-                                                $510
+                                                $511
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
