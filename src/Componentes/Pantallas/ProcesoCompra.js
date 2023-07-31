@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import useStyles from "../../Theme/useStyles";
 
-const ProcesoCompra = () => {
+const ProcesoCompra = (props) => {
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(1);
     const continuarProceso = () => {
@@ -15,11 +15,8 @@ const ProcesoCompra = () => {
     }
 
     const RealizarCompra = () => {
-        const IdCompra = "";
+        const IdCompra = "1";
         history.push("/OrdenCompra/" + IdCompra);
-    
-
-
     }
     const classes = useStyles();
     return(
@@ -82,10 +79,15 @@ const ProcesoCompra = () => {
                                 </RadioGroup>                                
                             </FormControl>
                             <Grid item xs = {12}>
-                                <Button variant ="contained" color ="primary" onClick={RetrocederProceso} className={classes.ButtonAnterior}>
+                                <Button variant ="contained" 
+                                color ="primary" 
+                                onClick={RetrocederProceso} 
+                                className={classes.ButtonAnterior}>
                                     Anterior
                                 </Button>
-                                <Button variant ="contained" color ="primary" onClick={continuarProceso}>
+                                <Button variant ="contained"
+                                color ="primary" 
+                                onClick={continuarProceso}>
                                     Continuar
                                 </Button>
                             </Grid>
@@ -117,7 +119,7 @@ const ProcesoCompra = () => {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell>
-                                            <CardMedia className={classes.imgproductoPC} image title="imagen"></CardMedia>
+                                            <CardMedia className={classes.imgproductoPC} image title="imagen"/>     
                                         </TableCell>
                                         <TableCell>
                                             <Typography className={classes.text_details}>
@@ -198,14 +200,17 @@ const ProcesoCompra = () => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell>
-                                            <Button variant="contained" color="primary" size="large" onClick={RealizarCompra}>Realizar Pedido</Button>
+                                            <Button variant="contained" 
+                                            color="primary" size="large" 
+                                            onClick={RealizarCompra}>
+                                                Realizar Pedido
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                    </Grid>
-                    
+                    </Grid>                    
                 </Grid>
             ) : null}
         </Container>
