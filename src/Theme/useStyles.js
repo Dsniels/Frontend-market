@@ -158,6 +158,21 @@ const useStyles = makeStyles({
         backgroundColor: "#f2f2f2",
         width: 50,
         height: 40
+    },
+    textEnvio : {
+        lineHeight: 3
+    },
+    alertNotDeliverded :{
+        marginTop: 5,
+        padding: "15px 15px 5px 15px",
+        marginBottom: 20,
+        backgroundColor: "#ffcccc"
+    },
+    alertDeliverded :{
+        marginTop: 5,
+        padding: "15px 15px 5px 15px",
+        marginBottom: 20,
+        backgroundColor: "#d6f5d6"
     }
 })
 
