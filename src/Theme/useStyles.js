@@ -173,6 +173,27 @@ const useStyles = makeStyles({
         padding: "15px 15px 5px 15px",
         marginBottom: 20,
         backgroundColor: "#d6f5d6"
+    },
+    imageUploader :{
+        padding: 0,
+        margin: "-25px auto 15px",
+        width: 0
+    },
+    avatarPerfil :{
+        width: 130,
+        height: 130,
+        backgroundColor:"#0f80aa" 
+    },
+    table:{
+        border: "1px solid #e0e0e0"
+    },
+    iconDelivered:{
+        color: "green",
+        fontWeight: 900
+    },
+    iconNotDelivered:{
+        color: "red",
+        fontWeight: 900
     }
 })
 
