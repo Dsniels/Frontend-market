@@ -1,7 +1,11 @@
 import { AppBar, Container, Icon, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import React, { useState } from 'react';
 import useStyles from '../../Theme/useStyles';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import MenuCliente from './Desktop/MenuCliente';
+import MenuAdmin from './Desktop/MenuAdmin';
+import MenuMobile from './Mobile/MenuMobile';
+
 
 
 
@@ -31,14 +35,15 @@ const MenuAppBar = () => {
                             onClose={closeToggle}>
                                 <div className={classes.list}>
                                     <List>
-                                        <ListItem button onClick={closeToggle} className={classes.listItem}>
+                                        {/*<ListItem button onClick={closeToggle} className={classes.listItem}>
                                             <Link to="/login" color ="inherit" className={classes.LinkBarmobile} underline='none'>
                                                 <ListItemIcon className={classes.listItemIcon}>
                                                     <Icon>person</Icon>
                                                 </ListItemIcon>
                                                 <ListItemText>Login</ListItemText>
                                             </Link>
-                                        </ListItem>
+                                        </ListItem> */}
+                                        <MenuMobile clickHandler={closeToggle}/>
                                     </List>
                                 </div>
                                 
@@ -50,12 +55,14 @@ const MenuAppBar = () => {
                                 </Link>
                             </div>
                             <div className={classes.sectionDesktop}>
-                                <Button color ="inherit" className={classes.ButtonIcon}>
+                                {/*<Button color ="inherit" className={classes.ButtonIcon}>
                                     <Link to="/login" color = "inherit" className={classes.linkBarDesktop} underline='none'>
                                         <Icon className={classes.mr}>person</Icon>
                                         Login
                                     </Link>
-                                </Button>
+                                </Button> */}
+                                <MenuCliente/>
+                                <MenuAdmin/>
                             </div>
                         </Toolbar>
                     </Container>
