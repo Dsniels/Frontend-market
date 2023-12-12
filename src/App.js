@@ -11,6 +11,8 @@ import CarritoCompras from "./Componentes/Pantallas/CarritoCompras";
 import ProcesoCompra from "./Componentes/Pantallas/ProcesoCompra";
 import OrdenCompra from "./Componentes/Pantallas/OrdenCompra";
 import Perfil from "./Componentes/Seguridad/Perfil";
+import Usuarios from "./Componentes/Pantallas/Admin/Usuarios";
+import EditarUsuario from "./Componentes/Pantallas/Admin/EditarUsuario";
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route exact path = "/ProcesoCompra" component ={ProcesoCompra}/>
           <Route exact path = "/OrdenCompra/:id" component ={OrdenCompra}/>
           <Route exact path = "/perfil" component ={Perfil}/>
+          <Route exact path = "/admin/Usuarios" component ={Usuarios}/>
+          <Route exact path = "/admin/Usuarios/:id" component ={EditarUsuario}/>
        </Switch>
       </Router>
 
