@@ -208,6 +208,9 @@ const useStyles = makeStyles({
         padding: 0,
         marginTop: 5,
         marginBottom: 5
+    },
+    buttonAgregar:{
+        float: "right"
     }
 })
 
