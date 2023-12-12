@@ -44,7 +44,7 @@ const MenuAdmin = () => {
                 open={Boolean(anchorEl)}
                 onClose ={handleClose}>
                     <MenuItem className={classes.listItem} onClick={handleClose}>
-                        <Link className={classes.LinkBarmobile} to="/">
+                        <Link className={classes.LinkBarmobile} to="/admin/Usuarios">
                             <ListItemIcon className={classes.listItemIcon}>
                                 <Icon>group</Icon>
                             </ListItemIcon>

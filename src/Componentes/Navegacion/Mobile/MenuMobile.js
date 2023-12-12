@@ -12,7 +12,7 @@ const MenuMobile = (props) => {
         setOpenCliente((prevOpen) => !prevOpen);
     }
     const classes = useStyles();
-    
+
     return(
         <>
             <ListItem button onClick={handleClickCliente} className={classes.listItem}>
