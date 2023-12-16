@@ -3,10 +3,17 @@ import useStyles from "../../../Theme/useStyles";
 import { Button, Container, Grid, Icon, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
 import { productoArray } from "../../Data/DataPrueba";
 
-const ListaProductos = () => {
+const ListaProductos = (props) => {
     const productos = productoArray;
     const classes = useStyles();
 
+    const editaproducto = (id) => {
+        props.history.push("/admin/editarproductos/" + id)        
+    }
+    
+    const agregarproducto = () =>{
+        props.history.push("/admin/agregarProductos");
+    }
     return(
         <Container className={classes.containermt}>
             <Grid container>
@@ -18,7 +25,8 @@ const ListaProductos = () => {
                 <Grid item lg={6} sm={6} xs={12}>
                     <Button variant="contained" 
                     color="inherit" 
-                    className={classes.buttonAgregar}> 
+                    className={classes.buttonAgregar}
+                    onClick={agregarproducto}> 
                     <Icon>add</Icon>
                     Agregar producto
                     </Button>
@@ -43,7 +51,8 @@ const ListaProductos = () => {
                             <TableCell>{producto.marca}</TableCell>
                             <TableCell>
                                 <Button variant="contained"
-                                color="primary">
+                                color="primary"
+                                onClick={() => editaproducto(producto.key)}>
                                     <Icon>edit</Icon>
                                 </Button>
                                 <Button variant="contained"
