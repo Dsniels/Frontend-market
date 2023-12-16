@@ -1,6 +1,6 @@
 import React from "react";
 import useStyles from "../../../Theme/useStyles";
-import { Avatar, Button, ListItemIcon, ListItemText, MenuItem, Icon, Menu } from "@material-ui/core";
+import { Button, ListItemIcon, ListItemText, MenuItem, Icon, Menu } from "@material-ui/core";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 
@@ -60,7 +60,7 @@ const MenuAdmin = () => {
                         </Link>
                     </MenuItem>
                     <MenuItem className={classes.listItem} onClick={handleClose}>
-                        <Link className={classes.LinkBarmobile} to="/">
+                        <Link className={classes.LinkBarmobile} to="/admin/listaPedidos">
                             <ListItemIcon className={classes.listItemIcon}>
                                 <Icon>shopping_cart</Icon>
                             </ListItemIcon>

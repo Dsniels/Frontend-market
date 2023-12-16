@@ -14,6 +14,9 @@ import Perfil from "./Componentes/Seguridad/Perfil";
 import Usuarios from "./Componentes/Pantallas/Admin/Usuarios";
 import EditarUsuario from "./Componentes/Pantallas/Admin/EditarUsuario";
 import ListaProductos from "./Componentes/Pantallas/Admin/ListaProductos";
+import Agregarproducto from "./Componentes/Pantallas/Admin/Agregarproducto";
+import Editarproducto from "./Componentes/Pantallas/Admin/Editarproducto";
+import ListaPedidos from "./Componentes/Pantallas/Admin/ListaPedidos";
 
 
 function App() {
@@ -33,6 +36,9 @@ function App() {
           <Route exact path = "/admin/Usuarios" component ={Usuarios}/>
           <Route exact path = "/admin/Usuarios/:id" component ={EditarUsuario}/>
           <Route exact path = "/admin/listaProductos" component ={ListaProductos}/>
+          <Route exact path = "/admin/agregarProductos" component ={Agregarproducto}/>
+          <Route exact path = "/admin/editarproductos/:id" component ={Editarproducto}/>
+          <Route exact path = "/admin/listaPedidos" component ={ListaPedidos}/>
        </Switch>
       </Router>
 
