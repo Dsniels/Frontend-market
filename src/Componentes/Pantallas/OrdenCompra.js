@@ -131,7 +131,7 @@ const OrdenCompra = (props) => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell colSpan={2}>
-                                            <Button variant="contained" 
+                                            {/*<Button variant="contained" 
                                             color="primary" size="large" 
                                             fullWidth
                                             className={classes.gridmb}>
@@ -142,6 +142,13 @@ const OrdenCompra = (props) => {
                                             fullWidth
                                             >
                                             tarjeta
+                                            </Button>*/}
+                                            <Button 
+                                            variant ="contained"
+                                            color="primary"
+                                            size="large"
+                                            fullWidth>
+                                                Marcar entregado
                                             </Button>
                                     </TableCell>
                                 </TableRow>

@@ -6,6 +6,11 @@ const ListaPedidos = () => {
 
     const classes = useStyles();
 
+    const verDetalle = (props) => {
+        const id = "dewefen3o2133";
+        props.history.push("/OrdenCompra/"+id)
+    }
+
     return(
         <Container className={classes.containermt}>
             <Typography variant="h4" className={classes.text_title}>
@@ -35,7 +40,7 @@ const ListaPedidos = () => {
                                 <Icon className={classes.iconDelivered}>check</Icon>
                             </TableCell>
                             <TableCell>
-                                <Button variant="contained" color="inherit">
+                                <Button variant="contained" color="inherit" onClick={verDetalle}>
                                     Detalles
                                 </Button>
                             </TableCell>
@@ -50,7 +55,9 @@ const ListaPedidos = () => {
                                 <Icon className={classes.iconNotDelivered}>clear</Icon>
                             </TableCell>
                             <TableCell>
-                                <Button variant="contained" color="inherit">
+                                <Button variant="contained" 
+                                color="inherit"
+                                onClick={verDetalle}>
                                     Detalles
                                 </Button>
                             </TableCell>
