@@ -2,13 +2,15 @@ import { Avatar, Card, Container, Icon, Grid, Typography, TextField, Button } fr
 import React, { useState } from "react";
 import useStyles from "../../Theme/useStyles";
 import { Link } from 'react-router-dom';
+import { registrarUsuario } from "../../actions/UsuarioAction";
 
 
 const clearUsuario = {  
     nombre: '',
     apellido: '',
     email: '',
-    password:''
+    password:'',
+    username:''
 }
 
 const ResgistroUsuario = () => {
@@ -17,7 +19,8 @@ const ResgistroUsuario = () => {
         nombre: '',
         apellido: '',
         email: '',
-        password:''
+        password:'',
+        username: ''
     }); 
 
     const handleChange = (e) => {
@@ -29,8 +32,14 @@ const ResgistroUsuario = () => {
     }
 
     const guardarUsuario = () => {
+/*         const insertarData = nuevoUsuario(usuario);
         console.log("Usuario", usuario);
-        setUsuario(clearUsuario);
+        setUsuario(clearUsuario); */
+
+        registrarUsuario(usuario).then(response => {
+            console.log('objeto response que envia el servidor', response);
+            window.localStorage.setItem('token', response.data.token);
+        });
     }
 
     const classes = useStyles();
@@ -65,6 +74,16 @@ const ResgistroUsuario = () => {
                                         onChange={handleChange} 
                                          />
                                     </Grid>
+                                    <Grid item md={12} xs = {12} className={classes.gridmb}>
+                                        <TextField
+                                        label = "Username"
+                                        variant="outlined"
+                                        fullWidth
+                                        name = "username"
+                                        value={usuario.username}
+                                        onChange={handleChange} 
+                                         />
+                                    </Grid>                                    
                                     <Grid item md={12} xs = {12} className={classes.gridmb}>
                                         <TextField
                                         label = "Email"
