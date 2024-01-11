@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { LoginUsuario } from "../../actions/UsuarioAction";
 
 
-
+/* 
 const clearUsuario= {
     email : '',
     password : ''
-}
+} */
 
 
 
@@ -38,7 +38,17 @@ const Login = () => {
         setUsuario(clearUsuario);
         console.log("bienvenido", respuesta.miUsuario.nombre) */
 
-        LoginUsuario
+        LoginUsuario(usuario).then(response => {
+
+            if(response.status === 200){
+                window.localStorage.setItem('token', response.data.token);
+                console.log("El login fue exitoso", response.data);
+            }else {
+                console.log("errores en el login", response.data);
+            }
+
+
+        })
 
     }
 
@@ -60,17 +70,18 @@ const Login = () => {
                                      label = "Email"
                                      variant = "outlined"
                                      fullWidth
-                                     type = "Email"
+                                     type = "email"
+                                     name="email"
                                      value={usuario.email}
-                                     onChange={handleChange}>
-                                    </TextField>
+                                     onChange={handleChange}/>
                                 </Grid>
                                 <Grid item xs={12} className={classes.gridmb}>
                                     <TextField
                                     label = "Password"
                                     variant = "outlined"
                                     fullWidth
-                                    type = "Password"
+                                    type = "password"
+                                    name = "password"
                                     value={usuario.password}
                                     onChange={handleChange}>                                        
                                     </TextField>
