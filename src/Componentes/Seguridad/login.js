@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 import { LoginUsuario } from "../../actions/UsuarioAction";
 
 
-/* 
+
 const clearUsuario= {
     email : '',
     password : ''
-} */
+};
 
 
 
-const Login = () => {
+const Login = (props) => {
 
     const [usuario, setUsuario] = useState({
         email : '',
@@ -29,20 +29,14 @@ const Login = () => {
     }
 
     const loginEventoUsuario = () => {
-        /* const respuesta = accesoUsuario(usuario);
-        if(!respuesta.status){
-            console.log("Email y psw incorrectos");
-            return;
-        }
 
-        setUsuario(clearUsuario);
-        console.log("bienvenido", respuesta.miUsuario.nombre) */
 
         LoginUsuario(usuario).then(response => {
 
             if(response.status === 200){
                 window.localStorage.setItem('token', response.data.token);
                 console.log("El login fue exitoso", response.data);
+                props.history.push('/');
             }else {
                 console.log("errores en el login", response.data);
             }
