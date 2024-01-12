@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./Componentes/Seguridad/login";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./Theme/theme";
@@ -17,10 +17,35 @@ import ListaProductos from "./Componentes/Pantallas/Admin/ListaProductos";
 import Agregarproducto from "./Componentes/Pantallas/Admin/Agregarproducto";
 import Editarproducto from "./Componentes/Pantallas/Admin/Editarproducto";
 import ListaPedidos from "./Componentes/Pantallas/Admin/ListaPedidos";
+import { GetUsuario } from "./actions/UsuarioAction";
 
 
 function App() {
+
+  const [servidorResponse, setServidorResponse] = useState(false);
+
+  useEffect(() => {
+
+    if(!servidorResponse){
+      GetUsuario().then(response => {
+      
+        setServidorResponse(true);
+        console.log('estado de sesion', response);
+
+      })
+
+    }
+   
+    
+  }, [servidorResponse]);
+
+
+
+
+
   return (
+
+
     <ThemeProvider theme={theme}>
       <Router>
       <MenuAppBar/>
@@ -41,7 +66,6 @@ function App() {
           <Route exact path = "/admin/listaPedidos" component ={ListaPedidos}/>
        </Switch>
       </Router>
-
     </ThemeProvider>
 
 
