@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useStyles from "../../Theme/useStyles";
 import { Link } from 'react-router-dom';
 import { LoginUsuario } from "../../actions/UsuarioAction";
+import { useStateValue } from "../../contexto/store";
 
 
 
@@ -12,8 +13,9 @@ const clearUsuario= {
 };
 
 
-
 const Login = (props) => {
+
+    const[{sesionUsuario}, dispatch] = useStateValue();
 
     const [usuario, setUsuario] = useState({
         email : '',
@@ -31,8 +33,7 @@ const Login = (props) => {
     const loginEventoUsuario = () => {
 
 
-        LoginUsuario(usuario).then(response => {
-
+        LoginUsuario(usuario, dispatch).then(response => {
             if(response.status === 200){
                 window.localStorage.setItem('token', response.data.token);
                 console.log("El login fue exitoso", response.data);

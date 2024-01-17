@@ -3,9 +3,11 @@ import useStyles from "../../../Theme/useStyles";
 import { Avatar, Button, ListItemIcon, ListItemText, MenuItem, Icon, Menu } from "@material-ui/core";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import { useStateValue } from "../../../contexto/store";
 
 
 const MenuCLiente = () => {
+    const[ {sesionUsuario} , dispatch] = useStateValue();
 
     const[anchorEl, setAnchorEl] = useState(null);
 
@@ -31,7 +33,7 @@ const MenuCLiente = () => {
                     <div className={classes.linkBarDesktop}>
                         <Avatar alt="mi imagen" 
                         className={classes.avatarPerfilAppBar}/>
-                        Daniel Salazar
+                        { sesionUsuario ? (sesionUsuario.autenticado ? sesionUsuario.usuario.nombre + ' ' + sesionUsuario.usuario.apellido : "no sesion") : "no sesion" }
                         <Icon>keyboard_arrow_down</Icon>
                     </div>
                 </Button>
