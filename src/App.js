@@ -4,7 +4,7 @@ import { ThemeProvider } from "@material-ui/core";
 import theme from "./Theme/theme";
 import ResgistroUsuario from "./Componentes/Seguridad/Registro";
 import MenuAppBar from "./Componentes/Navegacion/MenuAppBar";
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Productos from "./Componentes/Pantallas/Productos";
 import Detalles from "./Componentes/Pantallas/Detalles";
 import CarritoCompras from "./Componentes/Pantallas/CarritoCompras";
@@ -19,58 +19,67 @@ import Editarproducto from "./Componentes/Pantallas/Admin/Editarproducto";
 import ListaPedidos from "./Componentes/Pantallas/Admin/ListaPedidos";
 import { GetUsuario } from "./actions/UsuarioAction";
 import { useStateValue } from "./contexto/store";
-
+import { getCarrito } from "./actions/CarritoAction";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
-
-  const [ { sesionUsuario }, dispatch] = useStateValue();
+  const [{ sesionUsuario }, dispatch] = useStateValue();
   const [servidorResponse, setServidorResponse] = useState(false);
-
   useEffect(() => {
-
-    if(!servidorResponse){
-      GetUsuario(dispatch).then(response => {
-      
+    const fetchData = async () => {
+      let carritoid = window.localStorage.getItem("carrito");
+  
+      if (!carritoid) {
+        carritoid = uuidv4();
+        window.localStorage.setItem("carrito", carritoid);
+      }
+  
+      if (!servidorResponse) {
+        await GetUsuario(dispatch);
+        await getCarrito(dispatch, carritoid);
+        
         setServidorResponse(true);
-        console.log('estado de sesion', response);
-
-      })
-
-    }
-   
-    
-  }, [servidorResponse]);
-
-
-
-
+      }
+    };
+  
+    fetchData();
+  }, [servidorResponse, dispatch]); 
+  
 
   return (
-
-
     <ThemeProvider theme={theme}>
       <Router>
-      <MenuAppBar/>
+        <MenuAppBar />
         <Switch>
-          <Route exact path ="/Login" component={Login} />
-          <Route exact path ="/registrar" component={ResgistroUsuario} />
-          <Route exact path = "/" component ={Productos}/>
-          <Route exact path = "/Detalles/:id" component ={Detalles}/>
-          <Route exact path = "/Carrito" component ={CarritoCompras}/>
-          <Route exact path = "/ProcesoCompra" component ={ProcesoCompra}/>
-          <Route exact path = "/OrdenCompra/:id" component ={OrdenCompra}/>
-          <Route exact path = "/perfil" component ={Perfil}/>
-          <Route exact path = "/admin/Usuarios" component ={Usuarios}/>
-          <Route exact path = "/admin/Usuarios/:id" component ={EditarUsuario}/>
-          <Route exact path = "/admin/listaProductos" component ={ListaProductos}/>
-          <Route exact path = "/admin/agregarProductos" component ={Agregarproducto}/>
-          <Route exact path = "/admin/editarproductos/:id" component ={Editarproducto}/>
-          <Route exact path = "/admin/listaPedidos" component ={ListaPedidos}/>
-       </Switch>
+          <Route exact path="/Login" component={Login} />
+          <Route exact path="/registrar" component={ResgistroUsuario} />
+          <Route exact path="/" component={Productos} />
+          <Route exact path="/Detalles/:id" component={Detalles} />
+          <Route exact path="/Carrito" component={CarritoCompras} />
+          <Route exact path="/ProcesoCompra" component={ProcesoCompra} />
+          <Route exact path="/OrdenCompra/:id" component={OrdenCompra} />
+          <Route exact path="/perfil" component={Perfil} />
+          <Route exact path="/admin/Usuarios" component={Usuarios} />
+          <Route exact path="/admin/Usuarios/:id" component={EditarUsuario} />
+          <Route
+            exact
+            path="/admin/listaProductos"
+            component={ListaProductos}
+          />
+          <Route
+            exact
+            path="/admin/agregarProductos"
+            component={Agregarproducto}
+          />
+          <Route
+            exact
+            path="/admin/editarproductos/:id"
+            component={Editarproducto}
+          />
+          <Route exact path="/admin/listaPedidos" component={ListaPedidos} />
+        </Switch>
       </Router>
     </ThemeProvider>
-
-
   );
 }
 
