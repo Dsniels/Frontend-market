@@ -5,14 +5,16 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getproducto } from '../../actions/ProductoAction';
 import { addItem } from '../../actions/CarritoAction';
 import { useStateValue } from '../../contexto/store';
+import { useParams } from 'react-router-dom';
 
 const Detalles = (props) => {
     
     const [cantidad, setCantidad] = useState(1);
-    const [{SesionCarrito}, dispatch] = useStateValue();
+    const [{sesionCarrito}, dispatch] = useStateValue();
 
-    const [productoSeleccionado, setProductoSeleccionado] = useState(
-        {id: 0,
+    const [productoSeleccionado, setProductoSeleccionado] = useState({
+        
+        id: 0,
         nombre: "",
         descripcion: "",
         stock: 0,
@@ -21,8 +23,9 @@ const Detalles = (props) => {
         categoriaId: 0,
         categoriaNombre: "",
         precio: 0.0,
-        imagen:""}
-    );
+        imagen:""
+
+    });
 
     useEffect(()=>{
         const id = props.match.params.id;
@@ -32,11 +35,12 @@ const Detalles = (props) => {
         }
         getProductoAsync();
         
-    }, [setProductoSeleccionado])
+    }, [setProductoSeleccionado]);
 
 
     const classes = useStyles();
     const history = useHistory();
+
     const agregarCarrito = async () => {
         const item = {
             id: productoSeleccionado.id,
@@ -48,8 +52,8 @@ const Detalles = (props) => {
             categoria : productoSeleccionado.categoriaNombre
         };
 
-        await addItem(SesionCarrito, item, dispatch);
-
+        await addItem(sesionCarrito, item, dispatch);
+ 
         history.push("/carrito");
     }
 
