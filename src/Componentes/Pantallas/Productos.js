@@ -5,8 +5,12 @@ import { productoArray } from '../Data/DataPrueba';
 import { useHistory } from 'react-router-dom';
 import { getProductos } from '../../actions/ProductoAction';
 import { Pagination } from '@material-ui/lab';
+import { addItem } from '../../actions/CarritoAction';
+import {useStateValue} from '../../contexto/store';
 
 const Productos = (props) => {
+
+    const [ {sesionCarrito}, dispatch] = useStateValue();
 
     const [requestProductos, setRequestProductos] = useState({
         pageIndex: 1,
@@ -46,8 +50,10 @@ const Productos = (props) => {
 
 
     const history = useHistory(); 
-    const verProducto = (id) => {
-        history.push("/Detalles/" + id);
+
+    const verProducto = async (item) => {
+        history.push("/Detalles/" + item.id);
+       /* await addItem(sesionCarrito, item, dispatch); */
     }
     const Array  = productoArray;
 
@@ -82,7 +88,7 @@ const Productos = (props) => {
                             variant='contained'
                             color='primary'
                             fullWidth
-                            onClick={() => verProducto(data.id)}>
+                            onClick={() => verProducto(data)}>
                                 Detalles
                             </Button>
                         </CardContent>
