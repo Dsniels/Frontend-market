@@ -1,18 +1,63 @@
 import { Button, CardMedia, Container, Grid, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useStyles from '../../Theme/useStyles';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { getproducto } from '../../actions/ProductoAction';
+import { addItem } from '../../actions/CarritoAction';
+import { useStateValue } from '../../contexto/store';
 
-const Detalles = () => {
+const Detalles = (props) => {
+    
+    const [cantidad, setCantidad] = useState(1);
+    const [{SesionCarrito}, dispatch] = useStateValue();
+
+    const [productoSeleccionado, setProductoSeleccionado] = useState(
+        {id: 0,
+        nombre: "",
+        descripcion: "",
+        stock: 0,
+        marcaId: 0,
+        marcaNombre: "",
+        categoriaId: 0,
+        categoriaNombre: "",
+        precio: 0.0,
+        imagen:""}
+    );
+
+    useEffect(()=>{
+        const id = props.match.params.id;
+        const getProductoAsync = async() =>{
+            const response =  await getproducto(id);
+            setProductoSeleccionado(response.data)
+        }
+        getProductoAsync();
+        
+    }, [setProductoSeleccionado])
+
+
     const classes = useStyles();
     const history = useHistory();
-    const agregarCarrito = () => {
-        history.push("/carrito")
+    const agregarCarrito = async () => {
+        const item = {
+            id: productoSeleccionado.id,
+            producto: productoSeleccionado.nombre,
+            precio: productoSeleccionado.precio,
+            cantidad: cantidad,
+            imagen: productoSeleccionado.imagen,
+            marca : productoSeleccionado.marcaNombre,
+            categoria : productoSeleccionado.categoriaNombre
+        };
+
+        await addItem(SesionCarrito, item, dispatch);
+
+        history.push("/carrito");
     }
+
+
     return(
         <Container className={classes.containermt}>
             <Typography variant="h4" className={classes.text_title}>
-                Playera tigres
+                {productoSeleccionado.nombre}
             </Typography>
             <Grid container spacing={4}>
                     <Grid item lg={8} md={8} xs={12}>
@@ -20,7 +65,7 @@ const Detalles = () => {
                             <CardMedia 
                             className={classes.mediaDetail}
                             image='https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7'
-                            title="mi producto"
+                            title={productoSeleccionado.descripcion}
                             ></CardMedia>
                         </Paper>
                     </Grid>
@@ -34,7 +79,7 @@ const Detalles = () => {
                                         <Typography variant='subtitle2'>precio</Typography>
                                     </TableCell>
                                     <TableCell>
-                                        <Typography variant='subtitle2'>$25.99</Typography>
+                                        <Typography variant='subtitle2'>{productoSeleccionado.precio}</Typography>
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>  
@@ -42,14 +87,18 @@ const Detalles = () => {
                                         <Typography variant='subtitle2'>Cantidad</Typography>
                                     </TableCell>
                                     <TableCell>
-                                        <TextField
-                                        size="small"
-                                        select
-                                        variant="outlined">
-                                            <MenuItem value={1}>1</MenuItem>
-                                            <MenuItem value={1}>2</MenuItem>
-                                            <MenuItem value={1}>3</MenuItem>
-                                        </TextField>
+                                    <TextField
+                                        id = "Cantidad"
+                                        label=""
+                                        type='number'
+                                        value={cantidad}
+                                        onChange={event => setCantidad(event.target.value)}
+                                        defaultValue={1}
+                                        InputLabelProps={{
+                                            shrink: true
+                                        }}
+                                        />
+                                           
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -69,13 +118,13 @@ const Detalles = () => {
                 <Grid item lg={8} md={8} xs={12}>
                     <Grid container spacing={2}>
                         <Grid item md={6}>
-                            <Typography className={classes.text_details}>Precio: $25.99</Typography>
-                            <Typography className={classes.text_details}>unidades: 59</Typography>
-                            <Typography className={classes.text_details}>marca: Tigres</Typography>
-                            <Typography className={classes.text_details}>Tipo: Deportivo</Typography>
+                            <Typography className={classes.text_details}>Precio: {productoSeleccionado.precio}</Typography>
+                            <Typography className={classes.text_details}>unidades: {productoSeleccionado.stock}</Typography>
+                            <Typography className={classes.text_details}>marca: {productoSeleccionado.marcaNombre}</Typography>
+                            <Typography className={classes.text_details}>Tipo: {productoSeleccionado.categoriaNombre}</Typography>
                         </Grid>
                         <Grid item md={6}>
-                        <Typography className={classes.text_details}>Descripcion: Hola</Typography>
+                        <Typography className={classes.text_details}>Descripcion: {productoSeleccionado.descripcion}</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
