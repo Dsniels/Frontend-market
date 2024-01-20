@@ -16,7 +16,7 @@ const CarritoCompras = (props) => {
     const RealizarCompra = () =>{
         history.push("/ProcesoCompra");
     }
-    const array = productoArray;
+    const array = sesionCarrito ? sesionCarrito.items : [];
     const classes = useStyles();
     return(
         <Container className={classes.Container}>
@@ -28,30 +28,27 @@ const CarritoCompras = (props) => {
                     <TableContainer>
                         <Table>
                             <TableBody>
-                                {array.map(producto => (
-                                    <TableRow key = {producto.key}>
+                                {array.map(item => (
+                                    <TableRow key = {item.id}>
                                         <TableCell>
                                             <CardMedia className={classes.imgproductoCC}
                                             image='https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7'
-                                            title = "Imagen en carrito"></CardMedia>
+                                            title = {item.producto}></CardMedia>
                                         </TableCell>
                                         <TableCell>
                                             <Typography className={classes.text_details}>
-                                                {producto.titulo}
+                                                {item.producto}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography className={classes.text_details}>
-                                                ${producto.precio}
+                                                ${item.precio}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <select defaultValue={1} variant="outlined" size='small'>
-                                                <MenuItem value = {1}>1</MenuItem>
-                                                <MenuItem value = {2}>2</MenuItem>
-                                                <MenuItem value = {3}>3</MenuItem>
-                                                <MenuItem value = {4}>4</MenuItem>
-                                            </select>
+                                            <Typography className={classes.text_details}>
+                                                ${item.cantidad}
+                                            </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <IconButton>
