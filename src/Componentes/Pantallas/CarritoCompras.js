@@ -3,8 +3,15 @@ import React from 'react';
 import { productoArray } from '../Data/DataPrueba';
 import useStyles from '../../Theme/useStyles';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useStateValue } from '../../contexto/store';
 
-const CarritoCompras = () => {
+const CarritoCompras = (props) => {
+
+    const [{sesionCarrito}, dispatch] = useStateValue();
+    
+    console.log('sesioncarrito', sesionCarrito);
+
+
     const history = useHistory();
     const RealizarCompra = () =>{
         history.push("/ProcesoCompra");
@@ -39,12 +46,12 @@ const CarritoCompras = () => {
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <TextField select variant="outlined" size='small'>
+                                            <select defaultValue={1} variant="outlined" size='small'>
                                                 <MenuItem value = {1}>1</MenuItem>
                                                 <MenuItem value = {2}>2</MenuItem>
                                                 <MenuItem value = {3}>3</MenuItem>
                                                 <MenuItem value = {4}>4</MenuItem>
-                                            </TextField>
+                                            </select>
                                         </TableCell>
                                         <TableCell>
                                             <IconButton>
