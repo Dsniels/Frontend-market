@@ -15,6 +15,20 @@ export const getProductos = (request) => {
     })
 };
 
+
+export const getproducto = id =>{
+    return new Promise((resolve, eject) =>{
+        instancia.get(`/api/Producto/${id}`)
+        .then(response =>{
+            resolve(response);
+        })
+        .catch(error=>{
+            resolve(error.response);
+        });
+    });
+
+}
+
 /* 
 respose: 
     count:
