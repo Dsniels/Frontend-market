@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import useStyles from "../../../Theme/useStyles";
-import { Avatar, Button, Container, Grid, TextField, Typography } from "@material-ui/core";
+import { Avatar, Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core";
 import ImageUploader from 'react-images-upload';
 
 
 const Agregarproducto = () =>{
+    
+    const [categoria, setCategoria] = useState("");
+
+    const [marca, setMarca] = useState("");
+
+    const handlerCategoriaChange = (event) =>{
+        setCategoria(event.target.value);
+    }
+    const handlerMarcaChange = (event) =>{
+        setMarca(event.target.value);
+    }
+
+
+
     const classes = useStyles();
     return(
         <Container className={classes.containermt}>
             <Grid container justifyContent="center">
                 <Grid item sm={6} xs={12}>
                     <Typography variant="h4" className={classes.text_title}>
-                        Agregarproducto
+                        Agregar producto
                     </Typography>
                     <form onSubmit={(e) => e.preventDefault()} className={classes.form}>
                         <TextField
@@ -30,14 +44,7 @@ const Agregarproducto = () =>{
                         InputLabelProps={{
                             shrink: true
                         }}/>
-                        <TextField
-                        label="Marca"
-                        variant="outlined"
-                        fullWidth
-                        className={classes.gridmb}
-                        InputLabelProps={{
-                            shrink: true
-                        }}/>
+                        
                         <TextField
                         label="Stock"
                         variant="outlined"
@@ -56,6 +63,32 @@ const Agregarproducto = () =>{
                         InputLabelProps={{
                             shrink: true
                         }}/>
+                        <FormControl className={classes.FormControl}>
+                            <InputLabel id="marca-select-label">Marca</InputLabel>
+                            <Select
+                            laberID = "marca-select-label"
+                            id="marca-select"
+                            value={marca}
+                            onChange = {handlerMarcaChange}>
+                                <MenuItem value={1}>Nike</MenuItem>
+                                <MenuItem value={2}>Adidas</MenuItem>
+                            </Select>
+
+                        </FormControl>
+                        <FormControl className={classes.FormControl}>
+                            <InputLabel id="categoria-select-label">Categoria</InputLabel>
+                            <Select
+                            laberID = "categoria-select-label"
+                            id="categoria-select"
+                            value={categoria}
+                            onChange = {handlerCategoriaChange}>
+                                <MenuItem value={1}>vernao</MenuItem>
+                                <MenuItem value={2}>Invierno</MenuItem>
+                            </Select>
+
+                        </FormControl>
+                            
+
                         <Grid container spacing={2}>
                             <Grid item sm={6} xs={12}>
                                 <ImageUploader 
