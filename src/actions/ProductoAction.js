@@ -1,3 +1,4 @@
+import { uploadImage } from '../Firebase';
 import HttpCliente from '../Servicios/HttpCliente';
 import axios from 'axios';
 
@@ -27,6 +28,22 @@ export const getproducto = id =>{
         });
     });
 
+}
+
+export const registrarproducto = async (producto) => {
+    
+    const urlImage = await uploadImage(producto.file);
+    producto.imagen = urlImage
+
+    return new Promise ( (resolve, eject) =>{
+        HttpCliente.post("/api/Producto", producto)
+        .then(response =>{
+            resolve(response);
+        })
+        .catch(error =>{
+            resolve(error.response);
+        });
+    });
 }
 
 /* 

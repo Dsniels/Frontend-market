@@ -21,10 +21,10 @@ const storage = firebasApp.storage();
 export const uploadImage = (file) => {
     return new Promise( (resolve, eject )=>{
         const uploadProcess = storage.ref(`images/${file.name}-${file.lastModified}`).put(file);
-        uploadProcess.on("state_changed"), (snapshot) => console.log("la imagen se esta subiendo", snapshot), reject,
+        uploadProcess.on("state_changed", (snapshot) => console.log("la imagen se esta subiendo", snapshot), eject,
         () => {
             storage.ref('images').child(`${file.name}-${file.lastModified}`).getDownloadURL().then(resolve);
-        }
+        })
 
     });
 }
