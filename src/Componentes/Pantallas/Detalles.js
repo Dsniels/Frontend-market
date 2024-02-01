@@ -68,7 +68,7 @@ const Detalles = (props) => {
                         <Paper className={classes.PaperImg} variant ="outlined" square>
                             <CardMedia 
                             className={classes.mediaDetail}
-                            image='https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+                            image={productoSeleccionado.imagen ? productoSeleccionado.imagen : 'https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7'}
                             title={productoSeleccionado.descripcion}
                             ></CardMedia>
                         </Paper>

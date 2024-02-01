@@ -32,7 +32,7 @@ const CarritoCompras = (props) => {
                                     <TableRow key = {item.id}>
                                         <TableCell>
                                             <CardMedia className={classes.imgproductoCC}
-                                            image='https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+                                            image={item.image ? item.image : 'https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7'}
                                             title = {item.producto}></CardMedia>
                                         </TableCell>
                                         <TableCell>
