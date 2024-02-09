@@ -32,9 +32,10 @@ export const getproducto = id =>{
 
 export const registrarproducto = async (producto) => {
     
-    const urlImage = await uploadImage(producto.file);
-    producto.imagen = urlImage
-
+    if(producto.file){
+        const urlImage = await uploadImage(producto.file);
+        producto.imagen = urlImage
+    }
     return new Promise ( (resolve, eject) =>{
         HttpCliente.post("/api/Producto", producto)
         .then(response =>{
@@ -43,6 +44,23 @@ export const registrarproducto = async (producto) => {
         .catch(error =>{
             resolve(error.response);
         });
+    });
+}
+
+export const actualizarProducto = async (id, producto) => {
+    if(producto.file){
+        const urlImage = await uploadImage(producto.file);
+        producto.imagen = urlImage
+    }
+    return new Promise ( (resolve, eject) => {
+
+
+
+        HttpCliente.put(`/api/Producto/${id}`,producto).then(response =>{
+            resolve(response);
+        }).catch( error => {
+            resolve(error.response);
+        })
     });
 }
 
