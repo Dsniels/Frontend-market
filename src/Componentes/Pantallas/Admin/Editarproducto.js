@@ -1,10 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "../../../Theme/useStyles";
 import { Avatar, Button, Container, Grid, TextField, Typography } from "@material-ui/core";
 import ImageUploader from 'react-images-upload';
+import { getproducto } from '../../../actions/ProductoAction';
 
 
-const Editarproducto = () => {
+const Editarproducto = (props) => {
+
+    const [producto, setProducto] = useState({
+        nombre : '',
+        descripcion : '',
+        stock : 0,
+        marcaId : 0,
+        categoriaId : 0,
+        precio : 0.0,
+        imagen : '',
+        file : ""
+    });
+
+    const [categoria, setCategoria] = useState("");
+    const [marca, setMarca] = useState("");
+
+
+    const handleCategoriaChange = (event) => {
+         setCategoria(event.target.value);
+    }
+
+    const handleMarcaChange = (event) => {
+        setMarca(event.target.value);
+    }
+
+    const handleChange = (e) =>{
+        const {name, value} = e.target;
+        setProducto( (prev) => ({
+            ...prev,
+            [name] : value
+        }))
+    }
+
+
+
+    const subirImagen = (imagenes) => {
+        const foto = imagenes[0];
+        setProducto((prev) =>({
+            ...prev,
+            file : foto
+        }))
+    }
+
+
+    useEffect( () => {
+        const id = props.match.params.id;
+        const getProductoAsync = async() =>{
+            const response = await getproducto(id)
+            setProducto(response.data);
+            setCategoria(response.data.categoriaId);
+            setMarca(response.data.marcaId);
+        }
+        getProductoAsync();
+    }, [])
+
+
+
     const classes = useStyles();
 
     return(
@@ -21,7 +78,9 @@ const Editarproducto = () => {
                         InputLabelProps={{
                             shrink: true
                         }}
-                        value="playera futbol"/>
+                        value={producto.nombre}
+                        onChange={handleChange}
+                        name = "nombre"/>
                         <TextField
                         label="Precio Producto"
                         variant="outlined"
@@ -30,16 +89,9 @@ const Editarproducto = () => {
                         InputLabelProps={{
                             shrink: true
                         }}
-                        value={9.99}/>
-                        <TextField
-                        label="Marca"
-                        variant="outlined"
-                        fullWidth
-                        className={classes.gridmb}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        value="adidas"/>
+                        value={producto.precio}
+                        onChange={handleChange}
+                        name = "precio"/>
                         <TextField
                         label="Stock"
                         variant="outlined"
@@ -48,7 +100,9 @@ const Editarproducto = () => {
                         InputLabelProps={{
                             shrink: true
                         }}
-                        value={15}/>
+                        value={producto.stock}
+                        onChange={handleChange}
+                        name = "stock"/>
                         <TextField
                         label="Descripcion"
                         variant="outlined"
@@ -59,7 +113,9 @@ const Editarproducto = () => {
                         InputLabelProps={{
                             shrink: true
                         }}
-                        value="Playera de futbol con tela transpirable naklndjkajbdibw b dcnskldnkdcn"/>
+                        value= {producto.descripcion}
+                        name = "descripcion"
+                        onChange={handleChange}/>
                         <Grid container spacing={2}>
                             <Grid item sm={6} xs={12}>
                                 <ImageUploader 
