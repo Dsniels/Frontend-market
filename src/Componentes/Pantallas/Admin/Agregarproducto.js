@@ -6,7 +6,7 @@ import { registrarproducto } from "../../../actions/ProductoAction";
 import { v4 as uuidv4 } from "uuid";
 
 
-const Agregarproducto = () =>{
+const Agregarproducto = (props) =>{
     const imagenDefault = "https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
     const [producto, setProducto] = useState({
         id: 0,
@@ -37,6 +37,7 @@ const Agregarproducto = () =>{
         producto.marcaId = marca;
         const result = await registrarproducto(producto);
         console.log('resultado', result);
+        props.history.push("/admin/ListaProductos");
     }
 
     const handlerChange = (e) =>{
