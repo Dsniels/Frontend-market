@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 
 const Agregarproducto = () =>{
+    const imagenDefault = "https://th.bing.com/th/id/OIP.GQBZCwlkrBMLP0P0beQgZwHaHa?w=196&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
     const [producto, setProducto] = useState({
         id: 0,
         nombre: '',
@@ -16,7 +17,8 @@ const Agregarproducto = () =>{
         categoriaId: 0,
         precio: 0.0,
         imagen: '',
-        file: ''
+        file: '',
+        imagenTemporal : ""
     });   
     const [categoria, setCategoria] = useState("");
 
@@ -48,10 +50,18 @@ const Agregarproducto = () =>{
     }
 
     const subirImagen = imagenes =>{
-        const imagen = imagenes[0];
+        let imagen = imagenes[0];
+        let fototemp = "";
+        try{
+            fototemp = URL.createObjectURL(imagen)
+        }catch(e){
+            console.log(e);
+
+        }
         setProducto(prev => ({
             ...prev,
-            file: imagen
+            file: imagen,
+            imagenTemporal : fototemp
         }))
     }
 
@@ -158,7 +168,10 @@ const Agregarproducto = () =>{
                             <Grid item sm={6} xs={12}>
                                 <Avatar 
                                 variant="square"
-                                className={classes.AvatarProducto}/>
+                                className={classes.AvatarProducto}
+                                src = {
+                                    producto.imagenTemporal ? producto.imagenTemporal : imagenDefault
+                                }/>
                             </Grid>
                         </Grid>
                         <Button variant="contained" color="primary" onClick={guardarProducto}>

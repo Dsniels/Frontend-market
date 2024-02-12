@@ -1,7 +1,6 @@
 import { Avatar, Button, Card, CardContent, CardMedia, Container, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import useStyles from '../../Theme/useStyles';
-import { productoArray } from '../Data/DataPrueba';
 import { useHistory } from 'react-router-dom';
 import { getProductos } from '../../actions/ProductoAction';
 import { Pagination } from '@material-ui/lab';
@@ -55,7 +54,6 @@ const Productos = (props) => {
         history.push("/Detalles/" + item.id);
        /* await addItem(sesionCarrito, item, dispatch); */
     }
-    const Array  = productoArray;
 
     const classes = useStyles();
 

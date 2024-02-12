@@ -7,7 +7,7 @@ import { Pagination } from "@material-ui/lab";
 const ListaProductos = (props) => {
     const [requestProductos, setRequestProductos] = useState({
         pageIndex : 1,
-        pageSize: 4,
+        pageSize: 20,
         search : ''
     });
 
