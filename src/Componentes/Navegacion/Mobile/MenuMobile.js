@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import useStyles from "../../../Theme/useStyles";
 import { Avatar, Collapse, Link, ListItem, ListItemIcon, ListItemText,Icon, List } from "@material-ui/core";
+import { withRouter} from 'react-router-dom';
+import {useStateValue} from '../../../contexto/store.js'
 
 
 
 const MenuMobile = (props) => {
-
+    const [{sesionUsuario}, dispatch] = useStateValue();
     const[openCliente, setOpenCliente] = useState(false);
+    const salirSesion = (e)=>{
+        e.preventDefault();
+        localStorage.removeItem("token");
+        dispatch({
+            type: "SALIR_SESION",
+            nuevoUsuario : null,
+            autenticado : false
+        });
+
+        props.history.push("/login");
+    }
 
     const handleClickCliente = () => {
         setOpenCliente((prevOpen) => !prevOpen);
@@ -39,7 +52,9 @@ const MenuMobile = (props) => {
                         <Link className={classes.LinkBarmobile} to="/">
                             <ListItemIcon className={classes.listItemIcon}>
                                 <Icon>exit_to_app</Icon>
-                                <ListItemText>cerrar sesion</ListItemText>
+                                <ListItem button onClick={salirSesion}> 
+                                    <ListItemText>cerrar sesion</ListItemText>
+                                </ListItem>
                             </ListItemIcon>
                         </Link>
                     </ListItem>
@@ -57,4 +72,4 @@ const MenuMobile = (props) => {
     );
 };
 
-export default MenuMobile;
+export default withRouter(MenuMobile);
