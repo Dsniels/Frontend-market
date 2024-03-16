@@ -39,7 +39,13 @@ const Login = (props) => {
                 console.log("El login fue exitoso", response.data);
                 props.history.push('/');
             }else {
-                console.log("errores en el login", response.data);
+                dispatch({
+                    type: "OPEN_SNACKBAR",
+                    openMensaje : {
+                        open : true,
+                        mensaje : "El password o el email son incorrectos"
+                    },
+                });
             }
 
 
