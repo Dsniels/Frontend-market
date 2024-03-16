@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Login from "./Componentes/Seguridad/login";
-import { ThemeProvider } from "@material-ui/core";
+import { ThemeProvider, Snackbar } from "@material-ui/core";
 import theme from "./Theme/theme";
 import ResgistroUsuario from "./Componentes/Seguridad/Registro";
 import MenuAppBar from "./Componentes/Navegacion/MenuAppBar";
@@ -22,8 +22,10 @@ import { useStateValue } from "./contexto/store";
 import { getCarrito } from "./actions/CarritoAction";
 import { v4 as uuidv4 } from "uuid";
 
+
+ 
 function App() {
-  const [{ sesionUsuario }, dispatch] = useStateValue();
+  const [{ sesionUsuario, openSnackbar }, dispatch] = useStateValue();
   const [servidorResponse, setServidorResponse] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +50,27 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Snackbar
+        anchorOrigin= {{vertical:"bottom", horizontal:"center"}}
+        open = {openSnackbar ? openSnackbar.open : false}
+        autoHideDuration = {30}
+        ContentProps = {{"aria-describedby" : "message-id"}}
+        message = {
+          <span id="message-id">
+            {openSnackbar ? openSnackbar.mensaje : ""}
+          </span>
+        }
+        onClose = { () => 
+                dispatch({
+                  type: "OPEN_SNACKBAR",
+                  openMensaje: {
+                    open: false,
+                    mensaje : ""
+                  }
+                })
+        }
+      >
+      </Snackbar>
       <Router>
         <MenuAppBar />
         <Switch>
