@@ -36,7 +36,9 @@ const MenuMobile = (props) => {
                     src={
                             sesionUsuario ? (sesionUsuario.usuario.imagen ? sesionUsuario.usuario.imagen : '') : ''
                         }/>
-                    <ListItemText> Daniel Salazar</ListItemText>
+                    
+                    { sesionUsuario ? (sesionUsuario.autenticado ? sesionUsuario.usuario.nombre + ' ' + sesionUsuario.usuario.apellido : "no sesion") : "no sesion" }
+
                     <Icon> keyboard_arrow_down</Icon>
                 </div>                
             </ListItem>
@@ -46,7 +48,10 @@ const MenuMobile = (props) => {
                         <Link className={classes.LinkBarmobile} to="/perfil">
                             <ListItemIcon className={classes.listItemIcon}>
                                 <Icon>person</Icon>
-                                <ListItemText>mi perfil</ListItemText>
+                                <ListItem button onClick = '/perfil'>
+                                    <ListItemText>mi perfil</ListItemText>
+                                </ListItem>
+
                             </ListItemIcon>
                         </Link>
                     </ListItem>
