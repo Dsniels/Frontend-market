@@ -1,10 +1,61 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import useStyles from "../../../Theme/useStyles";
 import { Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from "@material-ui/core";
+import {GetUsuariobyId, agregarRole} from '../../../actions/UsuarioAction.js';
+import {withRouter} from 'react-router-dom';
+import { useStateValue } from "../../../contexto/store.js";
 
-const EditarUsuario = () => {
+const EditarUsuario = (props) => {
+    const [{sesionUsuario}, dispatch] = useStateValue();
     const classes = useStyles();
+    const [usuario, setUsuario] = useState({
+        nombre : '',
+        apellido:'',
+        email:''
+    });
 
+    const[admin, setAdmin] = useState(false);
+    const actualizarRoleUsuario = async(e) => {
+        e.preventDefault();
+        const id = props.match.params.id;
+        const role = {
+            nombre : "ADMIN",
+            status : admin
+        };
+
+        const response = await agregarRole(id, role, dispatch);
+        if(response.status === 200){
+            props.history.push("/admin/usuarios");
+        }
+        else{
+            dispatch({
+                type : "OPEN_SNAKBAR",
+                openMensaje : {
+                    open : true,
+                    mensaje : 'No es posible agregar role'
+                }
+            })
+        }
+
+
+    }
+
+    const handleChange = (e) => {
+        setAdmin(e.target.checked);
+    }
+    
+    useEffect( () => {
+        const id = props.match.params.id;
+        const getUsuarioIdAsync = async() => {
+            const response = await GetUsuariobyId(id);
+            setAdmin(response.data.admin);
+            setUsuario(response.data);
+        }
+
+        getUsuarioIdAsync();
+
+
+    },[])
 
     return(
         <Container className={classes.containermt}>
@@ -16,24 +67,27 @@ const EditarUsuario = () => {
                     <form onSubmit={(e) => e.preventDefault()} className={classes.form}>
                         <TextField lable="nombre" 
                         variant="filled" 
-                        value="Daniel" 
+                        value= {usuario.nombre + ' ' + usuario.apellido} 
                         fullWidth
                         disabled
                         className={classes.gridmb}
                         />
                         <TextField lable="Email" 
                         variant="filled" 
-                        value="Daniel@gmail.com" 
+                        value={usuario.email} 
                         fullWidth
                         disabled
                         />
                         <FormControl className={classes.checkbox}>
                             <FormControlLabel control={<Checkbox color="primary"/>}
                             label ="Administrador"
+                            checked = {admin}
+                            onChange = {handleChange}
                             ></FormControlLabel>
                         </FormControl>
                         <Button variant="contained"
-                        color="primary">
+                        color="primary"
+                        onClick = {actualizarRoleUsuario}>
                             Actualizar
                         </Button>
                     </form>
@@ -44,4 +98,4 @@ const EditarUsuario = () => {
     );
 };
 
-export default EditarUsuario;
+export default withRouter(EditarUsuario);

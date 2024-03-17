@@ -1,13 +1,50 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import useStyles from "../../../Theme/useStyles";
 import { Button, Container, Icon, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
+import {getUsuarios} from '../../../actions/UsuarioAction.js';
+import {Pagination} from '@material-ui/lab';
+import {withRouter} from 'react-router-dom';
+
+
 
 const Usuarios = (props) => {
     const classes = useStyles();
 
+    const [requestUsuarios, setRequestUsuarios] = useState({
+        pageIndex : 1,
+        pageSize : 3,
+    });
 
-    const editarUsuario = () => {
-        const id = "dnandknasknduw";
+    const [paginadorUsuarios, setPaginadorUsuarios] = useState({
+        count : 0,
+        pageIndex : 0,
+        pageSize : 0,
+        pageCount : 0,
+        data : []
+    });
+    
+    const handleChange = (event, value)=>{
+        setRequestUsuarios((prev) => ({
+            ...prev,
+            pageIndex : value
+        }));
+    }
+
+    useEffect( () => {
+        
+        const getlistaUsuarios = async () => {
+            const response = await getUsuarios(requestUsuarios);
+            setPaginadorUsuarios(response.data);
+        }
+    
+        getlistaUsuarios();
+
+    },[requestUsuarios])
+
+
+
+
+    const editarUsuario = (id) => {
         props.history.push("/admin/Usuarios/" + id);
     }
 
@@ -23,51 +60,33 @@ const Usuarios = (props) => {
                             <TableCell>id</TableCell>
                             <TableCell>Usuario</TableCell>
                             <TableCell>Email</TableCell>
-                            <TableCell>Admin</TableCell>
-                            <TableCell>vacio</TableCell>
+                            <TableCell>UserName</TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell>312343212</TableCell>
-                            <TableCell>Daniel</TableCell>
-                            <TableCell>Dans@gmail.com</TableCell>
-                            <TableCell><Icon className={classes.iconDelivered}>check</Icon></TableCell>
-                            <TableCell>
-                                <Button variant="contained" 
-                                color="primary"
-                                onClick={editarUsuario}>
-                                    <Icon>edit</Icon>
-                                </Button>
-                                <Button variant="contained" color="secondary">
-                                    <Icon>delete</Icon>
-                                </Button>
-                                </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>312dasdsa</TableCell>
-                            <TableCell>Diego</TableCell>
-                            <TableCell>Diego@gmail.com</TableCell>
-                            <TableCell>
-                                <Icon className={classes.iconNotDelivered}>clear</Icon>
-                            </TableCell>
-                            <TableCell>
-                                <Button variant="contained" 
-                                color="primary"
-                                onClick={editarUsuario}>
-                                    <Icon>edit</Icon>
-                                </Button>
-                                <Button variant="contained" color="secondary">
-                                    <Icon>delete</Icon>
-                                </Button>
-                                </TableCell>
-                        </TableRow>
+                    <TableBody>{
+                                paginadorUsuarios.data.map((usuario) => ( 
+                                    <TableRow key={usuario.id} >
+                                        <TableCell>{usuario.id}</TableCell>
+                                        <TableCell>{usuario.nombre + ' '+ usuario.apellido}</TableCell>
+                                        <TableCell>{usuario.email}</TableCell>
+                                        <TableCell>{usuario.username}</TableCell>
+                                        <TableCell>
+                                            <Button variant = 'contained' color = 'primary' onClick = {() => editarUsuario(usuario.id) }>
+                                                <Icon>edit</Icon>
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+
+                                ))
+                            }
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Pagination count = {paginadorUsuarios.pageCount} page = {paginadorUsuarios.pageIndex} onChange = {handleChange}></Pagination>
         </Container>
 
     );
 };
 
-export default Usuarios;
+export default withRouter(Usuarios);
