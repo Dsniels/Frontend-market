@@ -15,7 +15,7 @@ export const actualizarUsuario = async (id, usuario, dispatch) => {
     }
 
     return new Promise ((resolve, eject) => {
-        HttpCliente.put("/api/usuario/actualizar/${id}", usuario).then(response => {
+        HttpCliente.put(`/api/usuario/actualizar/${id}`, usuario).then(response => {
             dispatch({
                 type: "ACTUALIZAR_USUARIO",
                 nuevoUsuario: response.data,

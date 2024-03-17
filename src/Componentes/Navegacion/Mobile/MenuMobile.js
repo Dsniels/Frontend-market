@@ -33,7 +33,9 @@ const MenuMobile = (props) => {
                     <Avatar
                     alt="imagen"
                     className={classes.avatarPerfilAppBar}
-                    src=""/>
+                    src={
+                            sesionUsuario ? (sesionUsuario.usuario.imagen ? sesionUsuario.usuario.imagen : '') : ''
+                        }/>
                     <ListItemText> Daniel Salazar</ListItemText>
                     <Icon> keyboard_arrow_down</Icon>
                 </div>                

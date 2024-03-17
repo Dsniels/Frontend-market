@@ -4,6 +4,10 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Avatar, Button, Container, Divider, Grid, TextField, Typography,Icon, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import ImageUploader from 'react-images-upload';
 import {useStateValue} from '../../contexto/store.js'
+import {v4 as uuidv4} from 'uuid';
+import { actualizarUsuario} from '../../actions/UsuarioAction.js';
+import {withRouter} from 'react-router-dom';
+
 
 
 const Perfil = (props) => {
@@ -11,7 +15,7 @@ const Perfil = (props) => {
     const  [{sesionUsuario}, dispatch] =useStateValue();
     
     const [usuario, setUsuario] = useState({
-        id : '',
+        id : '', 
         nombre :'',
         apellido : '',
         imagen : '',
@@ -35,7 +39,49 @@ const Perfil = (props) => {
         }
 
     },[sesionUsuario])
+    
+    const subirImagen = (imagenes) => {
+        let foto = imagenes[0];
+        let fotourl = '';
 
+        try {
+            fotourl = URL.createObjectURL(foto);
+        } catch (e) {
+            console.log(e);
+        }
+
+        setUsuario((prev) => ({
+            ...prev,
+            file: foto,
+            imagenTemporal : fotourl
+        }));
+
+    }
+    
+    const guardarUsuario = (e) => {
+        e.preventDefault();
+        actualizarUsuario(sesionUsuario.usuario.id, usuario, dispatch)
+        .then(response => {
+            if(response.status === 200){
+                window.localStorage.setItem('token', response.data.token);
+                props.history.push("/");
+            }else{
+                dispatch({
+                    type: "OPEN_SNAKBAR",
+                    openMensaje : {
+                        open :true,
+                        mensaje : 'Errores actualizando el usuario'
+                    }
+                });
+            }
+
+        })
+
+    }
+
+
+
+    const keyImage = uuidv4();
 
     const history = useHistory();
     const verDetalles = () =>{
@@ -52,12 +98,15 @@ const Perfil = (props) => {
                         Perfil
                     </Typography>
                     <form onSubmit={(e) => e.preventDefault()} className={classes.form}>
-                        <ImageUploader withIcon={false} buttonStyles={{borderRadius: "50%", padding: 10, margin: 0,
+                        <ImageUploader onChange={subirImagen} key ={keyImage} withIcon={false} buttonStyles={{borderRadius: "50%", padding: 10, margin: 0,
                         position: "absolute", botton: 15, left:15 }}
                         className={classes.imageUploader}
                         buttonText={<Icon>add_a_photo</Icon>}
-                        label ={<Avatar alt = "mi perfil" className={classes.avatarPerfil}
-                        src=''></Avatar>}
+                        label ={
+                            <Avatar alt = "mi perfil" className={classes.avatarPerfil} src = {
+                                    usuario.imagenTemporal ? usuario.imagenTemporal : (usuario.imagen ? usuario.imagen : '')
+                                } />
+                        }
                         imgExtension={['.jpg', '.png', '.jpeg']}
                         maxFileSize={5242880}/>
                         <TextField
@@ -98,7 +147,7 @@ const Perfil = (props) => {
                         fullWidth
                         className={classes.gridmb}
                         />
-                        <Button variant='contained'
+                        <Button onClick = {guardarUsuario} variant='contained'
                         color='primary' >
                             Actualizar
                         </Button>
@@ -147,4 +196,4 @@ const Perfil = (props) => {
     )
 };
 
-export default Perfil;
+export default withRouter(Perfil);

@@ -7,8 +7,9 @@ import { useStateValue } from "../../../contexto/store";
 
 
 const MenuCLiente = (props) => {
+    
     const[ {sesionUsuario} , dispatch] = useStateValue();
-
+    
     const[anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (e)=>{
@@ -43,7 +44,12 @@ const MenuCLiente = (props) => {
                 onClick={handleClick}>
                     <div className={classes.linkBarDesktop}>
                         <Avatar alt="mi imagen" 
-                        className={classes.avatarPerfilAppBar}/>
+                        className={classes.avatarPerfilAppBar}
+                        src = {
+                                sesionUsuario ? (sesionUsuario.usuario.imagen ? sesionUsuario.usuario.imagen : '') 
+                                : ''
+                            }
+                        />
                         { sesionUsuario ? (sesionUsuario.autenticado ? sesionUsuario.usuario.nombre + ' ' + sesionUsuario.usuario.apellido : "no sesion") : "no sesion" }
                         <Icon>keyboard_arrow_down</Icon>
                     </div>
