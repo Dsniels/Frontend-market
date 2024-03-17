@@ -1,11 +1,42 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import useStyles from '../../Theme/useStyles';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Avatar, Button, Container, Divider, Grid, TextField, Typography,Icon, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import ImageUploader from 'react-images-upload';
+import {useStateValue} from '../../contexto/store.js'
+
 
 const Perfil = (props) => {
     const classes = useStyles();
+    const  [{sesionUsuario}, dispatch] =useStateValue();
+    
+    const [usuario, setUsuario] = useState({
+        id : '',
+        nombre :'',
+        apellido : '',
+        imagen : '',
+        password : '',
+        file:'',
+        email:'',
+        imagenTemporal:''
+    });
+
+    const handleChange = (e) => {
+        const{name, value} = e.target;
+        setUsuario(prev => ({
+            ...prev,
+            [name]:value
+        }));
+    }
+    
+    useEffect(()=>{
+        if(sesionUsuario){
+            setUsuario(sesionUsuario.usuario);
+        }
+
+    },[sesionUsuario])
+
+
     const history = useHistory();
     const verDetalles = () =>{
         const id = "151516516565";
@@ -34,19 +65,26 @@ const Perfil = (props) => {
                         variant='outlined'
                         fullWidth
                         className={classes.gridmb}
-                        value='Daniel' />
+                        name = "nombre"
+                        value={usuario.nombre}
+                        onChange = {handleChange}/>
                         <TextField
                         label ="Apellido"
                         variant='outlined'
                         fullWidth
                         className={classes.gridmb}
-                        value='Salazar' />
+                        value={usuario.apellido}
+                        onChange = {handleChange}
+                        name = "apellido"/>
                         <TextField
                         label ="Email"
                         variant='outlined'
                         fullWidth
                         className={classes.gridmb}
-                        value='daniel@gmail.com' />
+                        value={usuario.email}
+                        name = "email"
+                        onChange = {handleChange}
+                        />
                         <Divider className={classes.Divider}/>
                         <TextField
                         label ="password"
