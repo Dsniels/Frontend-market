@@ -53,7 +53,7 @@ function App() {
       <Snackbar
         anchorOrigin= {{vertical:"bottom", horizontal:"center"}}
         open = {openSnackbar ? openSnackbar.open : false}
-        autoHideDuration = {30}
+        autoHideDuration = {3000}
         ContentProps = {{"aria-describedby" : "message-id"}}
         message = {
           <span id="message-id">
