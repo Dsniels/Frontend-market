@@ -37,6 +37,13 @@ export const setCarrito = (dispatch, carritoCompra) =>{
         });
     });
 }
+export const deleteItem = (carrito, indice, dispatch) => {
+
+    carrito.items.splice(indice,1);
+    setCarrito(dispatch,carrito);
+
+}
+
 
 export const addItem = (carrito, item, dispatch) =>{
     
